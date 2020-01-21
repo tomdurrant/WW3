@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:19.04
 MAINTAINER Tom Durrant <t.durrant@oceanum.science>
 
 ARG PHYSICS
@@ -17,6 +17,7 @@ RUN apt-get -y update &&\
 
 # Compile and install model
 COPY model /source/model
+COPY regtests /source/regtests
 WORKDIR /source
 
 # Set required environment variables
