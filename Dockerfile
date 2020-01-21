@@ -1,11 +1,9 @@
 FROM ubuntu:19.04
 MAINTAINER Tom Durrant <t.durrant@oceanum.science>
 
-ARG PHYSICS
-ARG COMP
-ARG SWITCH
-ARG PROGS
-
+ARG COMP='Gnu'
+ARG SWITCH='Ifremer1'
+ARG PROGS='ww3_grid ww3_strt ww3_prnc ww3_shel ww3_multi ww3_ounf ww3_ounp'
 
 # Upgrade and install required libs
 RUN apt-get -y update &&\
@@ -18,14 +16,13 @@ RUN apt-get -y update &&\
 # Compile and install model
 COPY model /source/model
 COPY regtests /source/regtests
-WORKDIR /source
+WORKDIR /source/model/bin
+
 
 # Set required environment variables
-#ENV COMP=${comp}
-#ENV SWITCH=${switch}
-#ENV PROGS=$progs
 ENV WWATCH3_NETCDF=NC4
 ENV NETCDF_CONFIG=/usr/bin/nc-config
-RUN /source/model/bin/w3_setup /source/model -q -c ${COMP} -s ${SWITCH} 
-#RUN /source/model/bin/w3_make ${PROGS}
-RUN /source/model/bin/w3_make ww3_grid ww3_ounf
+
+# Compile model
+RUN ./w3_setup /source/model -q -c ${COMP} -s ${SWITCH} 
+RUN ./w3_make ${PROGS}
