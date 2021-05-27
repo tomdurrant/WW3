@@ -1,0 +1,16 @@
+version: '2'
+
+services:
+
+  ww3:
+    image: tdurrant/ww3
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      args:
+        PHYSICS: "st4"
+        COMP: 'Gnu'
+        SWITCH: 'Ifremer1'
+    environment:
+        - WWATCH3_ENV=/source/wwatch3.env
+
