@@ -8,7 +8,7 @@ ARG PROGS='ww3_grid ww3_strt ww3_prnc ww3_shel ww3_multi ww3_ounf ww3_ounp'
 # Upgrade and install required libs
 RUN apt -y update &&\
     apt -y upgrade &&\
-	apt -y install make gcc gfortran vim mpich python3 curl \
+	apt -y install make gcc gfortran vim mpich python3 python3-pip curl \
                        libnetcdf-dev libnetcdff-dev &&\
     apt clean 
 
